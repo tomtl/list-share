@@ -9,6 +9,10 @@
       <%= f.email_field :email %>
     </div>
     <div class='control-group'>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+    <div class='control-group'>
       <%= f.label :time_zone %>
       <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, default: Time.zone.name %>
     </div>
