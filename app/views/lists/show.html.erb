@@ -1,0 +1,7 @@
+<%= render 'shared/content_title', title: @list.name %>
+
+<% @items.each do |item| %>
+  <div class='span8 well'>
+    <%= item.name %>
+  </div>
+<% end %>
