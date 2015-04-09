@@ -3,5 +3,6 @@
 <% @lists.each do |list| %>
   <div class='span8 well'>
     <h4><%= link_to list.name, list_path(list) %></h4>
+    <%= list.percent_complete %>% complete
   </div>
 <% end %>
