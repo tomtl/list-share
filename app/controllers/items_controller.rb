@@ -6,7 +6,6 @@ class ItemsController < ApplicationController
   def complete
     @item = Item.find(params[:id])
     
-
     if @item.update(completed_by: User.first.id)
       flash[:notice] = "Item has been marked completed!"
       redirect_to :back
