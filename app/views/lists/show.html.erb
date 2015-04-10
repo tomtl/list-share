@@ -1,5 +1,6 @@
 <%= render 'shared/content_title', title: @list.name %>
 
+<!--show item-->
 <% @items.each do |item| %>
   <div class='span8 well'>
     <p><%= item.name %></p>
@@ -17,6 +18,16 @@
       <i class = 'icon-ok'></i>
       Completed by <%= link_to item.completer.username, user_path(item.completed_by) %>
     <% end %>
-    
   </div>
 <% end %>
+
+<!--new item-->
+<div class='span8 well'>
+  <%= form_for [@list, @item] do |f| %>
+    <div class='control-group'>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <%= f.submit "Add item", class:'btn btn-primary' %>
+  <% end %>  
+</div>
