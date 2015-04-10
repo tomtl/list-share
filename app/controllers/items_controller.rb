@@ -1,7 +1,4 @@
 class ItemsController < ApplicationController
-  def new
-  end
-  
   def create
     @item = Item.create(item_params)
     @item.list = List.find(params[:list_id])
@@ -14,11 +11,6 @@ class ItemsController < ApplicationController
       flash[:error] = "Item save unsuccessful"
       redirect_to :back
     end
-    
-  end
-  
-  def edit
-  
   end
   
   def complete

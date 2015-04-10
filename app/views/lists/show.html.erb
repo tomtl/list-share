@@ -1,7 +1,7 @@
 <%= render 'shared/content_title', title: @list.name %>
 
 <!--show item-->
-<% @items.each do |item| %>
+<% @list.items.each do |item| %>
   <div class='span8 well'>
     <p><%= item.name %></p>
     <p>added by <%= link_to item.creator.username, user_path(item.creator) %></p>

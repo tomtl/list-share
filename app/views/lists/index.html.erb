@@ -1,8 +1,21 @@
 <%= render 'shared/content_title', title: "All Lists" %>
 
+<!--show lists-->
 <% @lists.each do |list| %>
   <div class='span8 well'>
     <h4><%= link_to list.name, list_path(list) %></h4>
     <%= list.percent_complete %>% complete
   </div>
 <% end %>
+
+<!--create new list-->
+<div class='span8 well'>
+  <%= form_for @list do |f| %>
+    <div class='control-group'>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <%= f.submit "Create List", class:'btn btn-primary' %>
+  <% end %>
+</div>
+
