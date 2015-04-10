@@ -1,4 +1,6 @@
-<%= render 'shared/content_title', title: @list.name %>
+<% header = "#{link_to('All Lists', lists_path)} &raquo; #{@list.name} List".html_safe %>
+<%= render 'shared/content_title', title: header %>
+<%= render 'shared/errors', obj: @item %>
 
 <!--show item-->
 <% @list.items.each do |item| %>

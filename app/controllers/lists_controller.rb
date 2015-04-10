@@ -3,6 +3,9 @@ class ListsController < ApplicationController
     @lists = List.all
     @list = List.new
   end
+  
+  def new
+  end
 
   def create
     @list = List.create(list_params)
@@ -10,10 +13,9 @@ class ListsController < ApplicationController
     
     if @list.save
       flash[:notice] = "Your list has been created!"
-      redirect_to lists_path
+      redirect_to list_path(@list)
     else
-      flash[:error] = "Your list was not created."
-      render :index
+      render :new
     end
   end
 
