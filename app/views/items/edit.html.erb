@@ -1,0 +1,28 @@
+<% header = "#{link_to('All Lists', lists_path)} &raquo; #{link_to @item.list.name,
+list_path(@item.list)} &raquo; Edit #{@item.name}".html_safe %>
+
+<%= render 'shared/content_title', title: header %>
+
+<div class='span8 well'>
+  <%= form_for [@item.list, @item] do |f| %>
+    <div class='control-group'>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <%= f.submit "Update Item Name", class:'btn btn-primary' %>
+  <% end %>
+</div>
+
+<% if !@item.completed_by.nil? %>
+  <div class='span8 well'>
+    <div class='dl-horizontal'>
+        <dt>Completed by:</dt>
+        <dd><%= link_to @item.completer.username, user_path(@item.completer) %></dd>
+    </div>
+    <%= link_to complete_list_item_path(@item.list, @item, completed: false), method: 'post' do %>
+      <div class='btn btn-warning nav-item'>
+        <i class = 'icon-remove'></i>
+        Mark incomplete
+      </div>
+    <% end %>  </div>
+<% end %>

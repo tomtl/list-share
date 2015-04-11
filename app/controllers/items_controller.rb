@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :require_user
+  before_action :set_item, only: [:show, :edit, :update]
 
   def create
     @item = Item.create(item_params)
@@ -15,14 +16,34 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @item.update(item_params)
+      flash[:notice] = "Item has been updated."
+      redirect_to list_path(@item)
+    else
+      flash[:error] = "Item has not been updated."
+      render :show
+    end
+  end
+
   def complete
     @item = Item.find(params[:id])
-    @item.completed_by = current_user.id
-    binding.pry
+
+    if params[:completed] == "true"
+      @item.completed_by = current_user.id
+    elsif params[:completed] == "false"
+      @item.completed_by = nil
+    end
 
     if @item.save
-      flash[:notice] = "Item has been marked completed!"
-      redirect_to :back
+      flash[:notice] = "Item has been updated!"
+      redirect_to list_path(@item.list)
     else
       flash[:error] = "That did not work"
       redirect_to :back
@@ -31,7 +52,11 @@ class ItemsController < ApplicationController
 
   private
     def item_params
-      params.require(:item).permit(:name)
+      params.require(:item).permit(:name, :completed)
+    end
+
+    def set_item
+      @item = Item.find(params[:id])
     end
 
 end

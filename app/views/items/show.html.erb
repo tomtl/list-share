@@ -1,0 +1,28 @@
+<% header = "#{link_to('All Lists', lists_path)} &raquo; #{link_to @item.list.name,
+list_path(@item.list)} &raquo; #{@item.name}".html_safe %>
+
+<%= render 'shared/content_title', title: header %>
+
+<div class='well'>
+  <div class='dl-horizontal'>
+    <dt>Item name:</dt>
+    <dd><%= @item.name %></dd>
+    <dt>List name:</dt>
+    <dd><%= link_to @item.list.name, list_path(@item.list) %></dd>
+    <dt>Added by:</dt>
+    <dd><%= link_to @item.creator.username, user_path(@item.creator) %></dd>
+    <dt>Added at:</dt>
+    <dd><%= @item.created_at %></dd>
+    <% if !@item.completed_by.nil? %>
+      <dt>Completed by:</dt>
+      <dd><%= link_to @item.completer.username, user_path(@item.completer) %></dd>
+    <% else %>
+      <dt>Completion status</dt>
+      <dd>Not yet completed</dd>
+    <% end %>
+  </div>
+</div>
+
+<div class="nav_item">
+  <%= link_to "Edit item", edit_list_item_path(@item.list, @item), class:'btn btn-primary' %>
+</div>
