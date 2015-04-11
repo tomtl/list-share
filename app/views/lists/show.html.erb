@@ -7,9 +7,9 @@
   <div class='span8 well'>
     <p><%= item.name %></p>
     <p>added by <%= link_to item.creator.username, user_path(item.creator) %></p>
-    
+
     <% if item.completed_by.nil? %>
-      <%= link_to complete_list_item_path(item.list, item), method: 'post' do %>
+      <%= link_to complete_list_item_path(item.list, item, completed_by: current_user), method: 'post' do %>
         <div class='btn btn-success nav-item'>
           <i class = 'icon-ok'></i>
           Mark complete
@@ -31,5 +31,5 @@
       <%= f.text_field :name %>
     </div>
     <%= f.submit "Add item", class:'btn btn-primary' %>
-  <% end %>  
+  <% end %>
 </div>
