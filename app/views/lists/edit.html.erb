@@ -10,13 +10,11 @@
     </ul>
   <% end %>
 
-  <%= form_for @list do |list_form| %>
-    <% @list.users.each do |user| %>
-      <%= list_form.fields_for user, index: user.id do |user_form| %>
-        <%= user_form.label :username %>
-        <%= user_form.text_field :username %>
-      <% end %>
-    <% end %>
-    <%= list_form.submit "Add user", class:'btn btn-primary' %>
+  <%= form_tag @list, method: 'patch' do %>
+    <div class='control-group'>
+      <%= label_tag :user %>
+      <%= text_field_tag :user %>
+    </div>
+    <%= submit_tag "Add user to this list", class:'btn btn-primary' %>
   <% end %>
 </div>

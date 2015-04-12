@@ -27,24 +27,17 @@ class ListsController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.new
   end
 
   def update
-    @user = User.find(params[:id])
-    @list.users << @user
-
-    if @list.update(list_params)
+    if @list.users << User.find_by(username: params[:user])
       flash[:notice] = "List has been updated."
       redirect_to list_path(@list)
     else
       flash[:error] = "List has not been updated."
       render :show
     end
-  end
-
-  def add_user
-
   end
 
   private
