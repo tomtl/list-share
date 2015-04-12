@@ -24,4 +24,15 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def list_user?
+    !!@list.users.include?(current_user)
+  end
+
+  def require_list_user
+    if logged_in && !list_user?
+      flash[:error] = "You do not have permission to access that list"
+      redirect_to root_path
+    end
+  end
 end

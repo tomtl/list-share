@@ -27,9 +27,13 @@ class ListsController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
+    @list.users << @user
+
     if @list.update(list_params)
       flash[:notice] = "List has been updated."
       redirect_to list_path(@list)
@@ -39,9 +43,13 @@ class ListsController < ApplicationController
     end
   end
 
+  def add_user
+
+  end
+
   private
     def list_params
-      params.require(:list).permit(:name)
+      params.require(:list).permit(:name, :user)
     end
 
     def set_list
