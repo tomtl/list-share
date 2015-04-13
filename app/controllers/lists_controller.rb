@@ -27,7 +27,7 @@ class ListsController < ApplicationController
   end
 
   def edit
-    @user = User.new
+    @user = ListUser.new
   end
 
   def update

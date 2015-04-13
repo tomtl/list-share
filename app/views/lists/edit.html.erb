@@ -1,4 +1,5 @@
-<%= render 'shared/content_title', title: "Edit List" %>
+<% header = "#{link_to('All Lists', lists_path)} &raquo; #{link_to(@list.name, list_path(@list))} &raquo; Edit".html_safe %>
+<%= render 'shared/content_title', title: header %>
 <%= render 'shared/errors', obj: @list %>
 <%= render 'form' %>
 
@@ -10,11 +11,6 @@
     </ul>
   <% end %>
 
-  <%= form_tag @list, method: 'patch' do %>
-    <div class='control-group'>
-      <%= label_tag :user %>
-      <%= text_field_tag :user %>
-    </div>
-    <%= submit_tag "Add user to this list", class:'btn btn-primary' %>
-  <% end %>
+  <%= link_to "Add/Remove users for this list", new_list_list_user_path(@list), class:'btn btn-primary' %>
 </div>
+

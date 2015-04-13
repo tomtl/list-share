@@ -12,6 +12,8 @@ PostitTemplate::Application.routes.draw do
         post :complete
       end
     end
+
+    resources :list_users, only: [:new, :create, :destroy]
   end
 
   resources :users, except: [:index, :destroy]
