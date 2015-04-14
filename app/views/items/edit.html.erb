@@ -3,15 +3,7 @@ list_path(@item.list)} &raquo; Edit #{@item.name}".html_safe %>
 
 <%= render 'shared/content_title', title: header %>
 
-<div class='span8 well'>
-  <%= form_for [@item.list, @item] do |f| %>
-    <div class='control-group'>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </div>
-    <%= f.submit "Update Item Name", class:'btn btn-primary' %>
-  <% end %>
-</div>
+<%= render 'items/form', item: @item %>
 
 <% if !@item.completed_by.nil? %>
   <div class='span8 well'>

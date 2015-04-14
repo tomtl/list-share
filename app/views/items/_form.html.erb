@@ -1,0 +1,11 @@
+<% list ||= item.list %>
+
+<div class='span8 well'>
+  <%= form_for [list, item] do |f| %>
+    <div class='control-group'>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <%= f.submit (item.new_record? ? "Add Item" : "Update Item Name"), class:'btn btn-primary' %>
+  <% end %>
+</div>

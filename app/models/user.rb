@@ -12,4 +12,12 @@ class User < ActiveRecord::Base
 
   has_secure_password validations: false
 
+  def to_do_items
+    self.items.select{ |item| item.completed_by.nil? }
+  end
+  
+  def completed_items
+    self.items.select{ |item| !item.completed_by.nil? }
+  end
+
 end

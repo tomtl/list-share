@@ -11,4 +11,7 @@
   </dl>
 </div>
 
-<h5><%= @user.username %> 's Activity </h5>
+<h5><%= @user.username %> 's To-Do Items: </h5>
+<% @user.to_do_items.each do |to_do_item| %>
+  <%= render 'items/item', item: to_do_item %>
+<% end %>

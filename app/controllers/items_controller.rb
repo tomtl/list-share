@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.create(item_params)
-    @item.list = List.find(params[:list_id])
+    @item.list = List.find_by slug: params[:list_id]
     @item.creator = current_user
 
     if @item.save

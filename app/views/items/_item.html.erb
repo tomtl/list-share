@@ -1,0 +1,18 @@
+<div class='span8 well'>
+  <p><%= link_to item.name, list_item_path(item.list, item) %></p>
+
+  <% if item.completed_by.nil? %>
+    <p>added by <%= link_to item.creator.username, user_path(item.creator) %></p>
+    <%= link_to complete_list_item_path(item.list, item, completed: true), method: 'post' do %>
+      <div class='btn btn-success nav-item'>
+        <i class = 'icon-ok'></i>
+        Mark complete
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if !item.completed_by.nil? %>
+    <i class = 'icon-ok'></i>
+    Completed by <%= link_to item.completer.username, user_path(item.completer) %>
+  <% end %>
+</div>
