@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :require_user, except: [:new, :create]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :require_same_user, only: [:show, :edit, :update]
   
 
   def new
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = "You are now registered!"
-      session[user_id] = @user.id
+      session[:user_slug] = @user.slug
       redirect_to root_path
     else
       render :new
@@ -46,8 +46,7 @@ class UsersController < ApplicationController
     
     def require_same_user
       if current_user != @user
-        flash[:error] = "You're not allowed to do that."
-        redirect_to root_path
+        access_denied
       end
     end
 end

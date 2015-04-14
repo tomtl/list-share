@@ -1,4 +1,5 @@
 class ListUsersController < ApplicationController
+  before_action :require_list_user
   before_action :set_list, only: [:new, :create, :destroy]
   before_action :set_list_user, only: [:destroy]
   
@@ -41,5 +42,10 @@ class ListUsersController < ApplicationController
     
     def set_list_user
       @list_user = ListUser.find(params[:id])
+    end
+    
+    def require_list_user
+      set_list
+      access_denied unless logged_in? && @list.users.include?(@current_user)
     end
 end

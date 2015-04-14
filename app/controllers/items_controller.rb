@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :require_user
+  before_action :require_item_user, except: [:create]
   before_action :set_item, only: [:show, :edit, :update, :complete]
 
   def create
@@ -57,4 +58,14 @@ class ItemsController < ApplicationController
     def set_item
       @item = Item.find_by slug: params[:id]
     end
+    
+    def item_user?
+      !!@item.list.users.include?(@current_user)
+    end
+    
+    def require_item_user
+      set_item
+      access_denied unless logged_in? && item_user?
+    end
+    
 end

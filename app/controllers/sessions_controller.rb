@@ -8,9 +8,6 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_slug] = user.slug
       flash[:notice] = "Welcome - you're logged in!"
-      
-      binding.pry
-      
       redirect_to root_path
     else
       flash[:error] = "There is a problem with your username or password."

@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   before_action :require_user, except: [:index]
+  before_action :require_list_user, except: [:index, :new, :create]
   before_action :set_list, only: [:show, :edit, :update]
 
   def index
@@ -46,6 +47,15 @@ class ListsController < ApplicationController
     end
 
     def set_list
-      @list = List.find_by(slug: params[:id])
+      @list = List.find_by slug: params[:id]
+    end
+    
+    def list_user?
+      !!@list.users.include?(@current_user)
+    end
+  
+    def require_list_user
+      set_list
+      access_denied unless logged_in? && list_user?
     end
 end
