@@ -1,7 +1,11 @@
 class List < ActiveRecord::Base
+  include Sluggable
+  
   has_many :items
   has_many :list_users
   has_many :users, through: :list_users
+  
+  sluggable_column :name
 
   validates :name, presence: true
 

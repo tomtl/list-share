@@ -19,7 +19,7 @@
 
     <% if !item.completed_by.nil? %>
       <i class = 'icon-ok'></i>
-      Completed by <%= link_to item.completer.username, user_path(item.completed_by) %>
+      Completed by <%= link_to item.completer.username, user_path(item.completer) %>
     <% end %>
   </div>
 <% end %>

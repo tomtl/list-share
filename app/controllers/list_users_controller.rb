@@ -1,12 +1,13 @@
 class ListUsersController < ApplicationController
+  before_action :set_list, only: [:new, :create, :destroy]
+  before_action :set_list_user, only: [:destroy]
+  
   def new
-    @list = List.find(params[:list_id])
     @list_user = ListUser.new
   end
 
   def create
     @list_user = ListUser.create
-    @list = List.find(params[:list_id])
     @list_user.list = @list
     @list_user.user = User.find_by username: list_user_params[:user]
 
@@ -20,9 +21,6 @@ class ListUsersController < ApplicationController
   end
   
   def destroy
-    @list = params[:list_id]
-    @list_user = ListUser.find(params[:id])
-    
     if @list_user.destroy
       flash[:notice] = "#{@list_user.user.username} has been removed from this list."
     else
@@ -35,5 +33,13 @@ class ListUsersController < ApplicationController
   private
     def list_user_params
       params.require(:list_user).permit(:user)
+    end
+    
+    def set_list
+      @list = List.find_by slug: params[:list_id]
+    end
+    
+    def set_list_user
+      @list_user = ListUser.find(params[:id])
     end
 end

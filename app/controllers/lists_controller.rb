@@ -46,6 +46,6 @@ class ListsController < ApplicationController
     end
 
     def set_list
-      @list = List.find(params[:id])
+      @list = List.find_by(slug: params[:id])
     end
 end
