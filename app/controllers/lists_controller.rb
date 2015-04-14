@@ -32,11 +32,11 @@ class ListsController < ApplicationController
   end
 
   def update
-    if @list.users << User.find_by(username: params[:user])
-      flash[:notice] = "List has been updated."
+    if @list.update(list_params)
+      flash[:notice] = "This list has been renamed successfully."
       redirect_to list_path(@list)
     else
-      flash[:error] = "List has not been updated."
+      flash[:error] = "This list has not been renamed"
       render :show
     end
   end
