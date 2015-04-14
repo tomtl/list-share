@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update]
 
   def index
-    @lists = List.all
+    @lists = logged_in? ? current_user.lists : Array(List.first)
     @list = List.new
   end
 

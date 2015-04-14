@@ -2,7 +2,7 @@
 <div class='span8 well'>
   <%= form_for @list do |f| %>
     <div class='control-group'>
-      <%= f.label :name, "New list name:" %>
+      <%= f.label :name, "List name:" %>
       <%= f.text_field :name %>
     </div>
     <%= f.submit (@list.new_record? ? "Create List" : "Rename List"), class:'btn btn-primary' %>
