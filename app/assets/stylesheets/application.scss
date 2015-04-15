@@ -15,7 +15,9 @@
  @import "bootstrap";
 
 .navbar .nav > li > a.brand {
-  padding-left: 0px;
+  padding-left: 25px;
+  background: url('images/Lists_head.png');
+  background-width: 100%
 }
 
 .quiet {
@@ -37,4 +39,3 @@ div.nav_item {
 div.comment_votes {
   padding: 10px;
 }
-
